@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { addMoneyController, bookingController, CheckOutController, createWithdraw, likeController, notificationController, refund, searchData, userController } from "./user.controller";
+import { addMoneyController, bookingController, CheckOutController, createWithdraw, likeController, notificationController, refund, userController } from "./user.controller";
 const router = Router();
 const UserController = new userController();
 const LikeController = new likeController();
@@ -46,7 +46,6 @@ router.put("/refund",refund);
 
 router.post("/withdraw",createWithdraw);
 
-router.get("/search",searchData)
 
 
 

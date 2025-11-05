@@ -6,6 +6,7 @@ import type { Date } from "mongoose";
 import { UserDocument } from "./commonSchema";
 import { CommissionType, PaymentStatus } from "../Base_Class/baseEnum";
 import { Property } from "../../modules/Merchant/merchant.model";
+
 @modelOptions({
   schemaOptions: {
     timestamps: true,
