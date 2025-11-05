@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseController } from "../../Base/Base_Class/Base.controller";
 import { ApiResponse } from "../../Base/Base_Class/response";
-import { Booking, CommissionModel, LikeList, Notification } from "../../Base/Base_Model/common_Model";
+import { Booking, CommissionModel, LikeList, Notification, WithdawModel } from "../../Base/Base_Model/common_Model";
 import { addWallet, User, UserModel } from "./user.model";
 import { addMoneyService, bookingService, checkOutService, LikeService, notificationService, UserServics } from "./user.service";
 import { MerchantPayment, MerchantPaymentModel } from "../Merchant/merchant.model";
@@ -160,3 +160,40 @@ export const refund = async (req: Request, res: Response) => {
         ApiResponse.error(res, error)
     }
 }
+
+ export const createWithdraw = async(req: Request, res: Response)=>{
+    try {
+      const { userId, amount } = req.body;
+
+      if (!userId || !amount) {
+        return ApiResponse.error(res, "Missing required fields", 400);
+      }
+
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        return ApiResponse.error(res, "User not found", 404);
+      }
+
+      if (user.wallet < amount) {
+        return ApiResponse.error(res, "Insufficient wallet balance", 400);
+      }
+
+      user.wallet -= amount;
+      await user.save();
+
+      const withdraw = await WithdawModel.create({
+        user: user._id,
+        amount: amount
+      });
+
+      await withdraw.save();
+
+      return ApiResponse.success(res, "Withdraw request created successfully", withdraw);
+
+    } catch (error: any) {
+      console.log(error);
+      return ApiResponse.error(res, "Failed to create withdraw request", 500);
+    }
+  }
+
+  

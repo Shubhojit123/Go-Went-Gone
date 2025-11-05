@@ -200,3 +200,20 @@ export class Commission{
 }
 
 export const CommissionModel = getModelForClass(Commission)
+
+
+@modelOptions({
+  schemaOptions: {
+    timestamps: true,
+    collection: "withdraw"
+  }
+})
+export class withdraw{
+    @prop({required:true,ref:()=>User,type:()=> mongoose.Types.ObjectId})
+    user !: Ref<User>
+
+    @prop({required:true})
+    amount !: number
+}
+
+export const WithdawModel = getModelForClass(withdraw);

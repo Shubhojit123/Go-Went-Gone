@@ -12,8 +12,10 @@
   "description": "",
   "dependencies": {
     "@typegoose/typegoose": "^12.19.0",
+    "@types/geoip-lite": "^1.4.4",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "geoip-lite": "^1.4.10",
     "mongoose": "^8.18.3",
     "nodemon": "^3.1.10"
   },

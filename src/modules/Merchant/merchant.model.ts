@@ -1,5 +1,5 @@
 import { getModelForClass, modelOptions, prop, Ref } from "@typegoose/typegoose";
-import {Address,PropertyVerification,BankDetails} from "../../Base/Base_Model/commonSchema"
+import {Address,PropertyVerification,BankDetails, IGeoLocation} from "../../Base/Base_Model/commonSchema"
 import {PaymentStatus, PROPERTYSTATUS} from "../../Base/Base_Class/baseEnum"
 import { User } from "../User/user.model";
 import { Room } from "./room.model";
@@ -27,6 +27,9 @@ export class Property{
 
     @prop ({default:false})
     verification !: boolean
+
+    @prop({ type:  IGeoLocation })
+    geoLocation?: IGeoLocation;
 
     @prop ({type : PropertyVerification})
     VerificationDetails !: PropertyVerification

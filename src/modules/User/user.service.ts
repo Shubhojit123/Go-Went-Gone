@@ -246,3 +246,4 @@ export class checkOutService extends BaseService<MerchantPayment>{
         }
     }
 }
+
